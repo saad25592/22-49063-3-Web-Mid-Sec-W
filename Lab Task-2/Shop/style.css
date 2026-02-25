@@ -8,7 +8,6 @@ body {
   font-style: italic;
 }
 
-
 .product {
   display: inline-block; 
   width: 280px;
@@ -20,19 +19,16 @@ body {
   vertical-align: top; 
 }
 
-
 .product:hover {
   outline: 4px solid blue;
   outline-offset: 10px;
 }
-
 
 img {
   width: 250px;
   height: 250px;
   object-fit: contain;
 }
-
 
 h3 {
   color: black;
