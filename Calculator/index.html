@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Grid Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        
+        <div class="buttons">
+            <button class="btn action">AC</button>
+            <button class="btn action">+/-</button>
+            <button class="btn action">%</button>
+            <button class="btn operator">÷</button>
+            
+            <button class="btn">7</button>
+            <button class="btn">8</button>
+            <button class="btn">9</button>
+            <button class="btn operator">×</button>
+            
+            <button class="btn">4</button>
+            <button class="btn">5</button>
+            <button class="btn">6</button>
+            <button class="btn operator">−</button>
+            
+            <button class="btn">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+            <button class="btn operator">+</button>
+            
+            <button class="btn zero">0</button>
+            <button class="btn">.</button>
+            <button class="btn operator">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('.btn');
+        let currentInput = '0';
+
+        function handleInput(value) {
+            if (value === 'AC' || value === 'Escape') {
+                currentInput = '0';
+            } 
+            else if (value === '=' || value === 'Enter') {
+                try {
+                 
+                    let mathExpression = currentInput
+                        .replace(/×/g, '*')
+                        .replace(/÷/g, '/')
+                        .replace(/−/g, '-')
+                        .replace(/%/g, '*0.01'); 
+
+                   
+                    let result = eval(mathExpression);
+
+                   
+                    if (result.toString().includes('.')) {
+                        currentInput = Number(result.toFixed(8)).toString(); 
+                    } else {
+                        currentInput = result.toString();
+                    }
+                } catch {
+                    currentInput = "Error";
+                }
+            } 
+            else if (value === 'Backspace') {
+                currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : '0';
+            }
+            else if (value === '+/-') {
+                if (currentInput !== '0') {
+                    currentInput = (parseFloat(currentInput) * -1).toString();
+                }
+            }
+            else {
+                
+                let inputChar = value;
+                if (value === '*') inputChar = '×';
+                if (value === '/') inputChar = '÷';
+                if (value === '-') inputChar = '−';
+
+                const validKeys = '0123456789.+-*/%×÷−';
+
+                if (validKeys.includes(inputChar)) {
+                    
+                    if (currentInput.length > 12 && value !== 'Backspace') return;
+
+                    if (currentInput === '0' && inputChar !== '.') {
+                        currentInput = inputChar;
+                    } else {
+                        currentInput += inputChar;
+                    }
+                }
+            }
+            display.innerText = currentInput;
+        }
+
+       
+        buttons.forEach(button => {
+            button.addEventListener('click', () => handleInput(button.innerText));
+        });
+
+      
+        document.addEventListener('keydown', (event) => {
+            if (['/', 'Enter', 'Escape'].includes(event.key)) {
+                event.preventDefault();
+            }
+            handleInput(event.key);
+        });
+    </script>
+</body>
+</html>

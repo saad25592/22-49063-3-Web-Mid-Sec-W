@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard | HMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <nav class="sidebar">
+            <h2>HMS Doctor</h2>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><button onclick="logout()" class="logout-btn">Logout</button></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <header>
+                <h1>Welcome, Dr. Khush Mohammad Saad</h1>
+                <p>Manage your appointments here.</p>
+            </header>
+            <section class="form-container">
+                <h3>Add Appointment</h3>
+                <form id="patient-form">
+                    <input type="text" id="p-name" placeholder="Patient Name" required>
+                    <input type="number" id="p-age" placeholder="Age" required>
+                    <input type="time" id="p-time" required>
+                    <button type="submit">Add to List</button>
+                </form>
+            </section>
+            <section class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p-list">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
